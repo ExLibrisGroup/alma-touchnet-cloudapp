@@ -1,0 +1,18 @@
+<div class="loading-shade" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div> 
+<p>This app allows a user to pay fees using the Touchnet payment system. </p>
+<div *ngIf="user; else selectUser">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{user.full_name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Amount to pay: <strong>{{user.fees.value}}</strong></p>
+      <button mat-stroked-button *ngIf="user.fees.value>0" (click)="pay()" color="primary">Pay fines with Touchnet</button>
+    </mat-card-content>
+  </mat-card>
+</div>
+<ng-template #selectUser>
+  <p>Select a user to begin the process.</p>
+</ng-template>

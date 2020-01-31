@@ -1,0 +1,25 @@
+{
+   "$schema": "./manifest.schema.json",
+   "id": "alma-touchnet",
+   "title": "Pay Fines with Touchnet",
+   "description": "Enables payment of library fines and fees in Alma via Touchent",
+   "entities": [
+      "USER"
+   ],
+   "icon": {
+      "type": "url",
+      "value": "./assets/touchnet-logo.png"
+   },
+   "pages": {
+      "settings": "/#/configuration"
+   },
+   "contentSecurity": {
+      "connectSrc": [
+         "http://localhost:3002/touchnet"
+      ],
+      "sandbox": {
+         "modals": true,
+         "popups": true
+      }
+   }
+}
