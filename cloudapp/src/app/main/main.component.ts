@@ -38,11 +38,20 @@ export class MainComponent implements OnInit, OnDestroy {
   onPageLoad = (pageInfo: PageInfo) => {
     const entities = (pageInfo.entities||[]).filter(e=>e.type=='USER');
     if (entities.length == 1) {
-      this.restService.call(entities[0].link + '?expand=fees')
-        .subscribe(response => this.user = response as User )
+      this.loadUser(entities[0].link);
     } else {
       this.user = null;
     }
+  }
+
+  loadUser(link?: string) {
+    this.isLoading = true;
+    if (!link) link = `/users/${this.user.primary_id}`;
+    this.restService.call(`${link}?expand=fees`)
+      .subscribe({
+        next: response => this.user = response as User,
+        complete: () => this.isLoading = false
+       })
   }
 
   pay() {
@@ -80,7 +89,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   refreshPage() {
-    this.eventsService.refreshPage().subscribe();
+    this.eventsService.refreshPage().subscribe(() => this.loadUser());
   }
 
   ngOnDestroy(): void {

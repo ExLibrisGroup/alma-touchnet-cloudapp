@@ -2,13 +2,32 @@
    "$schema": "./manifest.schema.json",
    "id": "alma-touchnet",
    "title": "Pay Fines with Touchnet",
-   "description": "Enables payment of library fines and fees in Alma via Touchent",
+   "subtitle": [
+      {
+         "lang": "en",
+         "text": "Pay fines with Touchnet payment services"
+      },
+      {
+         "lang": "es",
+         "text": "Pague multas con los servicios de pago de Touchnet"
+      }
+   ],
+   "description": [
+      {
+         "lang": "en",
+         "text": "This app integrates a \"Pay with Touchnet\" option when accessing a user with an open balance. For institutions that use Touchnet for campus payments."
+      },
+      {
+         "lang": "es",
+         "text": "Esta aplicación integra una opción \"Pagar con Touchnet\" cuando accede a un usuario con un saldo abierto. Para instituciones que usan Touchnet para pagos del campus."
+      }
+   ],
    "entities": [
       "USER"
    ],
    "icon": {
       "type": "url",
-      "value": "./assets/touchnet-logo.png"
+      "value": "/assets/touchnet-logo.png"
    },
    "pages": {
       "settings": "/#/configuration"

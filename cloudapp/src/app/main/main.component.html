@@ -8,7 +8,7 @@
       <mat-card-title>{{user.full_name}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>Amount to pay: <strong>{{user.fees.value}}</strong></p>
+      <p>Amount to pay: <strong>{{user.fees.value}}</strong> <a (click)="loadUser()" class="icon-action"><mat-icon>refresh</mat-icon></a></p>
       <button mat-stroked-button *ngIf="user.fees.value>0" (click)="pay()" color="primary">Pay fines with Touchnet</button>
     </mat-card-content>
   </mat-card>

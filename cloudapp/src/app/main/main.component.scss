@@ -11,6 +11,11 @@
   justify-content: center;
 }
 
+.icon-action {
+  vertical-align: middle;
+  cursor: pointer;
+}
+
 :host::ng-deep .mat-card-header-text {
   margin: 0 0
 }
