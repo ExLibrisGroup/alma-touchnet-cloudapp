@@ -1,17 +1,6 @@
 {
-   "$schema": "./manifest.schema.json",
-   "id": "alma-touchnet",
-   "title": "Pay Fines with Touchnet",
-   "subtitle": [
-      {
-         "lang": "en",
-         "text": "Pay fines with Touchnet payment services"
-      },
-      {
-         "lang": "es",
-         "text": "Pague multas con los servicios de pago de Touchnet"
-      }
-   ],
+   "id": "jweisman/alma-touchnet-cloudapp",
+   "title": "Touchnet Payment Helper",
    "description": [
       {
          "lang": "en",
@@ -22,6 +11,16 @@
          "text": "Esta aplicación integra una opción \"Pagar con Touchnet\" cuando accede a un usuario con un saldo abierto. Para instituciones que usan Touchnet para pagos del campus."
       }
    ],
+   "subtitle": [
+      {
+         "lang": "en",
+         "text": "Pay fines with Touchnet payment services"
+      },
+      {
+         "lang": "es",
+         "text": "Pague multas con los servicios de pago de Touchnet"
+      }
+   ],
    "entities": [
       "USER"
    ],
@@ -30,7 +29,7 @@
       "value": "/assets/touchnet-logo.png"
    },
    "pages": {
-      "settings": "/#/configuration"
+      "config": "/#/configuration"
    },
    "contentSecurity": {
       "connectSrc": [

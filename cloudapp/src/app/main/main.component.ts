@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, HostListener, Injectable } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CloudAppEventsService, CloudAppRestService, CloudAppSettingsService, PageInfo, Request, HttpMethod } from '@exlibris/exl-cloudapp-angular-lib';
+import { CloudAppEventsService, CloudAppRestService, PageInfo, Request, HttpMethod, CloudAppConfigService } from '@exlibris/exl-cloudapp-angular-lib';
 import { environment } from '../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../models/user';
@@ -25,17 +25,18 @@ export class MainComponent implements OnInit, OnDestroy {
   constructor(
     private restService: CloudAppRestService, 
     private eventsService: CloudAppEventsService,
-    private settingsService: CloudAppSettingsService,
+    private configService: CloudAppConfigService,
     private toast: ToastrService
     ) { }
 
   ngOnInit(): void {
     this.eventsService.getPageMetadata().subscribe(this.onPageLoad);
     this.pageLoad$ = this.eventsService.onPageLoad(this.onPageLoad);
-    this.settingsService.get().subscribe(config => this.configuration = config as Configuration);
+    this.configService.get().subscribe(config => this.configuration = config as Configuration);
   }
 
   onPageLoad = (pageInfo: PageInfo) => {
+    console.log('pageInfo', pageInfo);
     const entities = (pageInfo.entities||[]).filter(e=>e.type=='USER');
     if (entities.length == 1) {
       this.loadUser(entities[0].link);
@@ -102,13 +103,13 @@ export class MainComponent implements OnInit, OnDestroy {
 })
 export class MainGuard implements CanActivate {
   constructor(
-    private settingsService: CloudAppSettingsService,
+    private configService: CloudAppConfigService,
     private router: Router
   ) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
-      return this.settingsService.get().pipe( map( config => {
+      return this.configService.get().pipe( map( config => {
         if (!config.upay_site_id) {
           this.router.navigate(['/errors/noconfig']);
           return false;

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent, MainGuard } from './main/main.component';
-import { ConfigurationComponent } from './configuration/configuration.component';
+import { ConfigurationComponent, ConfigurationGuard } from './configuration/configuration.component';
 import { NoConfigErrorComponent } from './static/errors.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [MainGuard] },
-  { path: 'configuration', component: ConfigurationComponent },
+  { path: 'configuration', component: ConfigurationComponent, canActivate: [ConfigurationGuard] },
   { path: 'errors/noconfig', component: NoConfigErrorComponent }
 ];
 
