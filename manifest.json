@@ -11,6 +11,7 @@
          "text": "Esta aplicación integra una opción \"Pagar con Touchnet\" cuando accede a un usuario con un saldo abierto. Para instituciones que usan Touchnet para pagos del campus."
       }
    ],
+   "author": "Josh Weisman",
    "subtitle": [
       {
          "lang": "en",
@@ -33,7 +34,7 @@
    },
    "contentSecurity": {
       "connectSrc": [
-         "http://localhost:3002/touchnet"
+         "https://exl-touchnet-connector.herokuapp.com/"
       ],
       "sandbox": {
          "modals": true,
