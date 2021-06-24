@@ -1,30 +1,12 @@
-.form-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-container > * {
+.mat-form-field {
   width: 100%;
+  display: block;
 }
 
-div.title {
-  display: flex;
-  margin-top: 10px;
+.mat-checkbox {
+  display: block;
 }
 
-div.title a {
-  margin-left: auto;
-}
-
-.commands-container {
-  margin-top: 10px;
-  width: fit-content;
-}
-
-.spinner {
-  float: right;
-}
-
-.commands-container button {
-  margin-right: 10px;
+.mat-card {
+  margin: 5px;
 }

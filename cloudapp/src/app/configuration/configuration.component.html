@@ -1,26 +1,50 @@
-<div class="title">
-  <h1>Configuration</h1>
-  <a [routerLink]="['']">
-    <button mat-raised-button>
+<div class="eca-actions">
+    <button mat-flat-button color="secondary" routerLink="/">
       <mat-icon>arrow_back</mat-icon>
       Back
     </button>
-    </a>
+    <button mat-flat-button color="secondary" (click)="load()" [disabled]="!form?.dirty">Reset</button> 
+    <button mat-flat-button color="primary" [disabled]="!form?.dirty" (click)="save()">Save</button>
 </div>
-<form [formGroup]="form" (ngSubmit)="save()">
+<div class="loading-shade" *ngIf="saving">
+  <mat-progress-spinner mode="indeterminate" diameter="50"></mat-progress-spinner>
+</div>
+<h1>Configuration</h1>
+<form *ngIf="form" [formGroup]="form" >
   <div class="form-container">
     <mat-form-field>
-      <input matInput placeholder="UPay Site ID" formControlName="upay_site_id">
+      <mat-label>UPay Site ID</mat-label>
+      <input matInput placeholder="" formControlName="upay_site_id">
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="UPad Site URL" formControlName="upay_site_url">
+      <mat-label>UPad Site URL</mat-label>
+      <textarea matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            formControlName="upay_site_url"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"></textarea>
     </mat-form-field>
   </div>
-  <div class="commands-container">
-    <button mat-stroked-button color="primary" [disabled]="!form.dirty">Save</button>
-    <button mat-stroked-button type="button" (click)="load()" [disabled]="!form.dirty">Reset</button> 
-    <mat-spinner diameter="30" class="spinner" *ngIf="saving"></mat-spinner>
-  </div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Hosted Connector</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Use this section to enable a hosted connector.</p>
+      <mat-checkbox formControlName="hosted">Enable</mat-checkbox>
+      <mat-form-field appearance="standard" [ngClass]="{'readonly': !hosted}">
+        <mat-label>API Key</mat-label>
+        <input matInput type="" [(ngModel)]="apikey" [ngModelOptions]="{standalone: true}">
+        <mat-hint>Enter an <a href="https://developers.exlibrisgroup.com/alma/apis/" target=_blank>API key</a> configured for read-write access to the Users area.</mat-hint>
+      </mat-form-field>
+    </mat-card-content>
+    <!--
+    <mat-card-actions>
+      <button mat-flat-button type="button" [disabled]="!!apikey && apikey.startsWith('*')" color="primary" (click)="saveApikey()">Save API Key</button>
+    </mat-card-actions>
+    -->
+  </mat-card> 
 </form>
 

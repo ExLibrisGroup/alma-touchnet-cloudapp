@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy, HostListener, Injectable } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CloudAppEventsService, CloudAppRestService, PageInfo, Request, HttpMethod, CloudAppConfigService } from '@exlibris/exl-cloudapp-angular-lib';
+import { CloudAppEventsService, CloudAppRestService, AlertService, PageInfo, Request, HttpMethod, CloudAppConfigService } from '@exlibris/exl-cloudapp-angular-lib';
 import { environment } from '../../environments/environment';
-import { ToastrService } from 'ngx-toastr';
 import { User } from '../models/user';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Configuration } from '../models/configuration';
@@ -26,7 +25,7 @@ export class MainComponent implements OnInit, OnDestroy {
     private restService: CloudAppRestService, 
     private eventsService: CloudAppEventsService,
     private configService: CloudAppConfigService,
-    private toast: ToastrService
+    private alert: AlertService
     ) { }
 
   ngOnInit(): void {
@@ -65,7 +64,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   @HostListener('window:message', ['$event'])
   onMessage(event: MessageEvent) {
-    if (environment.touchnetService.startsWith(event.origin)) {
+    if (event.data.amount && event.data.external_transaction_id) {
       const { amount, external_transaction_id } = event.data;
       let request: Request = { 
         url: `/users/${this.user.primary_id}/fees/all`,
@@ -80,10 +79,10 @@ export class MainComponent implements OnInit, OnDestroy {
       this.isLoading = true;
       this.restService.call(request).subscribe(
         resp => { 
-          this.toast.success(`Payment of ${amount} successfully posted.`);
+          this.alert.success(`Payment of ${amount} successfully posted.`);
           this.refreshPage(); 
         },
-        err => this.toast.error(`Could not post payment of ${amount}: ${err.message}`),
+        err => this.alert.error(`Could not post payment of ${amount}: ${err.message}`),
         () => this.isLoading = false
       );
     }

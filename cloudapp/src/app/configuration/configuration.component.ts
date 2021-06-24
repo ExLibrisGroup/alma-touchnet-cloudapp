@@ -1,8 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Configuration } from '../models/configuration';
-import { CloudAppEventsService, CloudAppConfigService } from '@exlibris/exl-cloudapp-angular-lib';
-import { ToastrService } from 'ngx-toastr';
+import { CloudAppEventsService, CloudAppConfigService, AlertService, FormGroupUtil } from '@exlibris/exl-cloudapp-angular-lib';
 import { Utils } from '../utilities';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -22,17 +21,16 @@ export class ConfigurationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private configService: CloudAppConfigService,
-    private toastr: ToastrService
+    private alert: AlertService
   ) { }
 
   ngOnInit() {
-    this.form = this.fb.group(new Configuration());
     this.load();
   }
 
   load() {
-    this.configService.getAsFormGroup().subscribe( configuration => {
-      if (!Utils.isEmptyObject(configuration.value)) this.form = configuration;
+    this.configService.get().subscribe( configuration => {
+      this.form = FormGroupUtil.toFormGroup(Object.assign(new Configuration(), configuration));
     });    
   }    
 
@@ -41,12 +39,16 @@ export class ConfigurationComponent implements OnInit {
     if (!this.form.valid) return;
     this.saving = true;
     this.configService.set(this.form.value).subscribe( response => {
-      this.toastr.success('Configuration saved.');
+      this.alert.success('Configuration saved.');
       this.form.markAsPristine();
       this.submitted = false;
       this.saving = false;
     },
-    err => this.toastr.error(err.message));
+    err => this.alert.error(err.message));
+  }
+
+  get hosted() {
+    return this.form && this.form.get('hosted').value;
   }
 }
 
