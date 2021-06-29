@@ -1,17 +1,6 @@
 {
-   "id": "jweisman/alma-touchnet-cloudapp",
+   "id": "exlibrisgroup/alma-touchnet-cloudapp",
    "title": "Touchnet Payment Helper",
-   "description": [
-      {
-         "lang": "en",
-         "text": "This app integrates a \"Pay with Touchnet\" option when accessing a user with an open balance. For institutions that use Touchnet for campus payments."
-      },
-      {
-         "lang": "es",
-         "text": "Esta aplicación integra una opción \"Pagar con Touchnet\" cuando accede a un usuario con un saldo abierto. Para instituciones que usan Touchnet para pagos del campus."
-      }
-   ],
-   "author": "Ex Libris",
    "subtitle": [
       {
          "lang": "en",
@@ -20,6 +9,17 @@
       {
          "lang": "es",
          "text": "Pague multas con los servicios de pago de Touchnet"
+      }
+   ],
+   "author": "Ex Libris",
+   "description": [
+      {
+         "lang": "en",
+         "text": "This app integrates a \"Pay with Touchnet\" option when accessing a user with an open balance. For institutions that use Touchnet for campus payments."
+      },
+      {
+         "lang": "es",
+         "text": "Esta aplicación integra una opción \"Pagar con Touchnet\" cuando accede a un usuario con un saldo abierto. Para instituciones que usan Touchnet para pagos del campus."
       }
    ],
    "entities": [
@@ -34,7 +34,8 @@
    },
    "contentSecurity": {
       "connectSrc": [
-         "https://exl-touchnet-connector.herokuapp.com/"
+         "https://exl-touchnet-connector.herokuapp.com/",
+         "https://api.exldevnetwork.net"
       ],
       "sandbox": {
          "modals": true,

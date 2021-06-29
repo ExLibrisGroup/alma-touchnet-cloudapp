@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  touchnetService: "https://exl-touchnet-connector.herokuapp.com/touchnet"
+  touchnetService: "https://api.exldevnetwork.net/tn"
 };

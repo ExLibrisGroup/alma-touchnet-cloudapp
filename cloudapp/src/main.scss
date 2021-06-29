@@ -8,8 +8,22 @@
 
 @mixin global-styles {
     /* Add global styles here */
-    body {
-        margin-top: 10px!important;
-    }
+    /* Readonly */
+    $readonly-color: lightgrey;
+    app-configuration .readonly {
+        &.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+            background-color: $readonly-color;
+        }
+        .mat-checkbox-frame {
+            border-color: $readonly-color;
+        }
+        .mat-select-value-text,
+        .mat-form-field-label,
+        .mat-hint,
+        .mat-input-element,
+        .mat-checkbox-label {
+          color: $readonly-color;
+        }
+      }
 }
 
