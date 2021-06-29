@@ -1,5 +1,5 @@
 {
-   "id": "jweisman/alma-touchnet-cloudapp",
+   "id": "exlibrisgroup/alma-touchnet-cloudapp",
    "title": "Touchnet Payment Helper",
    "subtitle": [
       {
@@ -34,7 +34,8 @@
    },
    "contentSecurity": {
       "connectSrc": [
-         "https://exl-touchnet-connector.herokuapp.com/"
+         "https://exl-touchnet-connector.herokuapp.com/",
+         "https://api.exldevnetwork.net"
       ],
       "sandbox": {
          "modals": true,

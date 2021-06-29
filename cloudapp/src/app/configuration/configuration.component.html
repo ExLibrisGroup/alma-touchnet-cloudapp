@@ -18,7 +18,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>UPad Site URL</mat-label>
+      <mat-label>UPay Site URL</mat-label>
       <textarea matInput
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
@@ -26,6 +26,13 @@
             cdkAutosizeMinRows="1"
             cdkAutosizeMaxRows="5"></textarea>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Touchnet WS URL</mat-label>
+      <mat-select formControlName="touchnet_ws_url">
+        <mat-option value="https://secure.touchnet.com:8702/tlinkauth/services/TPGSecureLink">Production</mat-option>
+        <mat-option value="https://test.secure.touchnet.net:8703/C30006test_tlink/services/TPGSecureLink">Test</mat-option>
+      </mat-select>
+    </mat-form-field> 
   </div>
   <mat-card>
     <mat-card-header>
@@ -36,7 +43,7 @@
       <mat-checkbox formControlName="hosted">Enable</mat-checkbox>
       <mat-form-field appearance="standard" [ngClass]="{'readonly': !hosted}">
         <mat-label>API Key</mat-label>
-        <input matInput type="" [(ngModel)]="apikey" [ngModelOptions]="{standalone: true}">
+        <input matInput type="" [(ngModel)]="apikey" (ngModelChange)="form.markAsDirty()" [ngModelOptions]="{standalone: true}">
         <mat-hint>Enter an <a href="https://developers.exlibrisgroup.com/alma/apis/" target=_blank>API key</a> configured for read-write access to the Users area.</mat-hint>
       </mat-form-field>
     </mat-card-content>
