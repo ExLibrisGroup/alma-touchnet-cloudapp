@@ -35,7 +35,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   onPageLoad = (pageInfo: PageInfo) => {
-    console.log('pageInfo', pageInfo);
     const entities = (pageInfo.entities||[]).filter(e=>e.type=='USER');
     if (entities.length == 1) {
       this.loadUser(entities[0].link);
@@ -59,7 +58,7 @@ export class MainComponent implements OnInit, OnDestroy {
       user_id: this.user.primary_id,
       total_sum: this.user.fees.value
     });
-    window.open(environment.touchnetService + "?s=" + btoa(JSON.stringify(options)) , "_blank", WINDOW_PROPS);
+    window.open(environment.touchnetService + "/touchnet?s=" + btoa(JSON.stringify(options)) , "_blank", WINDOW_PROPS);
   }
 
   @HostListener('window:message', ['$event'])

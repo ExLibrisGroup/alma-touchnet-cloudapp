@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule, getTranslateModule, AlertModule } from '@exlibris/exl-cloudapp-angular-lib';
+import { MaterialModule, CloudAppTranslateModule, AlertModule } from '@exlibris/exl-cloudapp-angular-lib';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -26,7 +26,7 @@ import { NoConfigErrorComponent } from './static/errors.component';
       BrowserAnimationsModule,
       AppRoutingModule,
       HttpClientModule,
-      getTranslateModule(),
+      CloudAppTranslateModule.forRoot(),
       AlertModule,
    ],
    providers: [],
